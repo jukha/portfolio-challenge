@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="intro card">
+    <div class="author-img">
+      <img src="https://picsum.photos/200" alt="" />
+    </div>
+    <div>
+      <div class="author-info">
+        <div>
+          <h2 class="author-name">Billy Pearson</h2>
+          <p class="author-designation">Front-end developer</p>
+        </div>
+        <div>
+          <p class="author-email">billy@example.com</p>
+          <p class="author-phone">(+603) 546 624 342</p>
+        </div>
+      </div>
+      <p class="author-about">
+        Self-motivated developer, who is willing to learn and create outstanding
+        UI applications. <br />
+        <br />
+        Donec aliquam est dui, vel vestibulum diam sollicitudin id. Quisque
+        feugiat malesuada molestie.
+      </p>
+    </div>
+  </div>
+  <section>
+    <article class="first">
+      <div class="skill card">
+        <h4 class="text-transform">Front End</h4>
+        <div class="skill-graph d-flex jc-sb" *ngFor="let skill of skills">
+          <span class="skill-label">{{ skill.name }}</span>
+          <div class="skill-total-score">
+            <div class="skill-current-score" [style.width]="skill.score"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hobbies card">
+        <h3>Hobbies</h3>
+        <div class="hobby" *ngFor="let hobby of hobbies">
+          <img src="{{ hobby.img }}" class="hobby-img" />
+          <h4 class="hobby-name">{{ hobby.name }}</h4>
+          <p class="hobby-description">{{ hobby.description }}</p>
+        </div>
+      </div>
+    </article>
+    <article class="second">
+      <div class="blog card">
+        <p>Blog</p>
+        <h3 class="blog-title">How to organize your CSS</h3>
+        <div class="blog-img">
+          <img src="assets/img/laptop-2434393_640.jpg" />
+        </div>
+        <p class="blog-text">
+          In this article I tell the story about Proin eu justo sit amet lacus
+          bibendum tincidunt. Vivamus non volutpat nisl, a luctus mi.
+          <br /><br />
+
+          Donec aliquam est dui, vel vestibulum diam sollicitudin id. Quisque
+          feugiat malesuada molestie.
+        </p>
+        <a href="#" class="blog-link">dev.to</a>
+      </div>
+      <div class="experiences card">
+        <h3>Experiences</h3>
+        <div
+          class="experience d-flex jc-sb ai-c"
+          *ngFor="let experience of experiences"
+        >
+          <div class="align-self-start">
+            <img src="{{ experience.companyLogo }}" class="company-logo" />
+          </div>
+          <div>
+            <p class="experience-date">{{ experience.date }}</p>
+            <h4 class="role">{{ experience.role }}</h4>
+            <p class="experience-description">{{ experience.description }}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div class="projects">
+    <div class="project-filter card">
+      <h5>
+        {{
+          projects.length > 0
+            ? "Projects " + "(" + projects.length + ")"
+            : "Project"
+        }}
+      </h5>
+      <div class="tags">
+        <a
+          class="inactive-tag tag"
+          #myTag
+          (click)="
+            getSelectedTag(myTag.textContent);
+            myTag.classList.contains('active-tag')
+              ? myTag.classList.remove('active-tag')
+              : myTag.classList.toggle('active-tag')
+          "
+          *ngFor="let tag of uniqueTags"
+          >{{ tag }}</a
+        >
+      </div>
+    </div>
+    <div class="projects-container">
+      <ng-container
+        *ngFor="
+          let project of arrayToShow
+            | paginate
+              : {
+                  id: 'listing_pagination',
+                  itemsPerPage: 3,
+                  currentPage: page,
+                  totalItems: totalRecords
+                }
+        "
+      >
+        <div class="single-project card">
+          <div class="project-img">
+            <img src="{{ project.img }}" />
+          </div>
+          <span *ngFor="let tag of project.tags"> {{ tag }}</span>
+          <h5>{{ project.name }}</h5>
+          <p>{{ project.description }}</p>
+          <div class="project-btns">
+            <a href="#" class="btn btn-primary">Demo</a>
+            <a href="#" class="btn btn-secondary">Code</a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div>
+      <pagination-controls
+        id="listing_pagination"
+        [directionLinks]="true"
+        [maxSize]="3"
+        (pageChange)="page = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>
