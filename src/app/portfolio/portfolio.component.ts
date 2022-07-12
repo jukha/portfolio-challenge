@@ -114,13 +114,12 @@ export class PortfolioComponent implements OnInit {
       }
     } else {
       this.selectedTagsSoFar.splice(this.selectedTagIndex, 1);
-      let a = 0;
-      while (this.arrayToShow.length > 0) {
-        console.log('hi');
-
+      let a = this.arrayToShow.length - 1;
+      while (a >= 0) {
         if (this.arrayToShow[a].primaryTag == tagVal) {
           this.arrayToShow.splice(a, 1);
         }
+        a--;
       }
     }
   }
