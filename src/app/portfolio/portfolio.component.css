@@ -187,9 +187,6 @@ p {
 .my-pagination ::ng-deep .ngx-pagination {
   display: flex;
 }
-.my-pagination ::ng-deep .ngx-pagination > * {
-  /* flex:1; */
-}
 
 .my-pagination ::ng-deep .ngx-pagination .pagination-previous::before,
 .my-pagination ::ng-deep .ngx-pagination .pagination-previous a::before,
@@ -203,18 +200,14 @@ p {
   font-size: 20px;
   color: var(--text-primary);
 }
-.my-pagination ::ng-deep .ngx-pagination .small-screen{
+.my-pagination ::ng-deep .ngx-pagination .small-screen {
   display: none;
 }
 .my-pagination ::ng-deep .ngx-pagination li {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px !important;
-  max-width: 36px !important;
-  height: 36px;
   font-size: 20px;
-  /* padding: 11px 14px; */
   border: 1px solid var(--text-primary);
   background-color: transparent;
   margin-left: 12px;
